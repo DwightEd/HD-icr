@@ -1,0 +1,58 @@
+{
+  "model": "/gz-fs/models/Meta-Llama-3.1-8B-Instruct",
+  "total_time_seconds": 7481.62,
+  "total_params": 8030261248,
+  "trainable_params": 8030261248,
+  "phases": {
+    "model_loading": {
+      "time_seconds": 21.28,
+      "gpu_peak_mb": 15316.5,
+      "cpu_peak_mb": 19.3,
+      "gpu_util_avg": 6.5,
+      "num_epochs": 0
+    },
+    "data_loading": {
+      "time_seconds": 1.5,
+      "gpu_peak_mb": 15316.5,
+      "cpu_peak_mb": 27.2,
+      "gpu_util_avg": 0.0,
+      "num_epochs": 0
+    },
+    "icr_extraction": {
+      "time_seconds": 7300.53,
+      "gpu_peak_mb": 43511.1,
+      "cpu_peak_mb": 3.9,
+      "gpu_util_avg": 23.7,
+      "num_epochs": 0,
+      "forward_count": 1032,
+      "forward_avg_ms": 7073.04,
+      "throughput_per_sec": 0.14
+    },
+    "probe_training": {
+      "time_seconds": 6.38,
+      "gpu_peak_mb": 15334.2,
+      "cpu_peak_mb": 0.6,
+      "gpu_util_avg": 10.0,
+      "num_epochs": 50,
+      "best_auroc": 0.6643,
+      "best_f1": 0.0714,
+      "forward_count": 1400,
+      "forward_avg_ms": 1.04,
+      "throughput_per_sec": 219.36
+    },
+    "evaluation": {
+      "time_seconds": 0.01,
+      "gpu_peak_mb": 15334.0,
+      "cpu_peak_mb": 0.0,
+      "gpu_util_avg": 5.0,
+      "num_epochs": 0
+    },
+    "token_level_detection": {
+      "time_seconds": 151.47,
+      "gpu_peak_mb": 36992.6,
+      "cpu_peak_mb": 3.6,
+      "gpu_util_avg": 21.2,
+      "num_epochs": 0
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "model": "/gz-fs/models/Qwen/Qwen3-8B",
+  "total_time_seconds": 8641.79,
+  "total_params": 8190735360,
+  "trainable_params": 8190735360,
+  "phases": {
+    "model_loading": {
+      "time_seconds": 21.34,
+      "gpu_peak_mb": 15622.6,
+      "cpu_peak_mb": 88.8,
+      "gpu_util_avg": 4.3,
+      "num_epochs": 0
+    },
+    "data_loading": {
+      "time_seconds": 1.57,
+      "gpu_peak_mb": 15622.6,
+      "cpu_peak_mb": 27.3,
+      "gpu_util_avg": 0.0,
+      "num_epochs": 0
+    },
+    "icr_extraction": {
+      "time_seconds": 8439.93,
+      "gpu_peak_mb": 42464.8,
+      "cpu_peak_mb": 3.9,
+      "gpu_util_avg": 23.0,
+      "num_epochs": 0,
+      "forward_count": 1032,
+      "forward_avg_ms": 8176.8,
+      "throughput_per_sec": 0.12
+    },
+    "probe_training": {
+      "time_seconds": 5.69,
+      "gpu_peak_mb": 15640.3,
+      "cpu_peak_mb": 0.6,
+      "gpu_util_avg": 8.7,
+      "num_epochs": 50,
+      "best_auroc": 0.6718,
+      "best_f1": 0.1724,
+      "forward_count": 1400,
+      "forward_avg_ms": 0.99,
+      "throughput_per_sec": 246.0
+    },
+    "evaluation": {
+      "time_seconds": 0.01,
+      "gpu_peak_mb": 15640.2,
+      "cpu_peak_mb": 0.0,
+      "gpu_util_avg": 6.0,
+      "num_epochs": 0
+    },
+    "token_level_detection": {
+      "time_seconds": 172.71,
+      "gpu_peak_mb": 41313.7,
+      "cpu_peak_mb": 4.0,
+      "gpu_util_avg": 23.1,
+      "num_epochs": 0
+    }
+  }
+}

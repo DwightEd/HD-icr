@@ -46,8 +46,9 @@ class ICRScore:
         hs_output = torch.cat([hidden_states_output[i, :, 0] for i in range(len(hidden_states_output))], dim=1)
         hs_all = torch.cat([hs_input, hs_output], dim=1)  # shape: [layer, input_size + output_size, hidden_size]
         del hidden_states_input, hs_input, hidden_states_output, hs_output
-        with torch.cuda.device(self.icr_device):
-            torch.cuda.empty_cache()
+        if self.icr_device.type == "cuda":
+            with torch.cuda.device(self.icr_device):
+                torch.cuda.empty_cache()
         return hs_all
 
     def _pre_process_attn(self, attentions):
@@ -97,8 +98,9 @@ class ICRScore:
         attn_all = self.set_other_attn_scores_to_zero(attn_all_o)
 
         del input_attn, output_attn, attn_all_o
-        with torch.cuda.device(self.icr_device):
-            torch.cuda.empty_cache()
+        if self.icr_device.type == "cuda":
+            with torch.cuda.device(self.icr_device):
+                torch.cuda.empty_cache()
         return attn_all
 
     def set_other_attn_scores_to_zero(self, attn_all):
@@ -122,8 +124,9 @@ class ICRScore:
         # Use the boolean mask to set unwanted positions to 0
         attn_all[~mask] = 0
         del mask
-        with torch.cuda.device(self.icr_device):
-            torch.cuda.empty_cache()
+        if self.icr_device.type == "cuda":
+            with torch.cuda.device(self.icr_device):
+                torch.cuda.empty_cache()
         return attn_all
 
     def _calculate_skewness_entropy(self, attn_map):
@@ -174,8 +177,9 @@ class ICRScore:
 
             skew_entropy_values.append(skewness_entropy)
             is_induction_layer_head.append(is_induction_head.tolist())
-        with torch.cuda.device(self.icr_device):
-            torch.cuda.empty_cache()
+        if self.icr_device.type == "cuda":
+            with torch.cuda.device(self.icr_device):
+                torch.cuda.empty_cache()
         return is_induction_layer_head 
 
     def _pooling_attn(self, pooling,use_induction_head):
@@ -205,8 +209,9 @@ class ICRScore:
                     1, 1)
                 pooled_attentions.append(torch.zeros(input_size))
                 raise ValueError(f"Layer {layer_idx} has no induction head.")
-        with torch.cuda.device(self.icr_device):
-            torch.cuda.empty_cache()
+        if self.icr_device.type == "cuda":
+            with torch.cuda.device(self.icr_device):
+                torch.cuda.empty_cache()
         return pooled_attentions  # [layer, output_size, all_size]
 
     def compute_icr(self, top_k, top_p, pooling, attention_uniform,hidden_uniform,use_induction_head):
@@ -246,8 +251,9 @@ class ICRScore:
 
             icr_scores_item.append(icr_scores_layer)
         top_p_mean = np.mean(top_p_list)
-        with torch.cuda.device(self.icr_device):
-            torch.cuda.empty_cache()
+        if self.icr_device.type == "cuda":
+            with torch.cuda.device(self.icr_device):
+                torch.cuda.empty_cache()
         return icr_scores_item, top_p_mean
 
 

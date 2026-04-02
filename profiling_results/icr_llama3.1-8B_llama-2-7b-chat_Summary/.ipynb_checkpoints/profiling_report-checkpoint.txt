@@ -1,0 +1,108 @@
+======================================================================
+ICR Probe Profiling Report
+======================================================================
+Timestamp:  2026-03-29T00:11:41.444928
+Model:      /gz-fs/models/Meta-Llama-3.1-8B-Instruct
+Parameters: 8,030,261,248 total | 8,030,261,248 trainable (100.00000%)
+GPU:        NVIDIA GeForce RTX 4090 (47.4 GB) x1
+Dataset:    RAGTruth (943 samples)
+            Train: 793, Test: 150
+            Task types: Summary=943
+            Labels: truthful=509, hallucinated=434
+
+Total Time: 4687.82s
+
+Phase Breakdown:
+---------------------------------------------------------------------------------
+Phase                       Time(s)   Time%  GPU Peak(MB) CPU Peak(MB)  GPU Util%
+---------------------------------------------------------------------------------
+model_loading                 21.87    0.5%       15316.5         19.3       5.2%
+data_loading                   1.38    0.0%       15316.5         27.6       0.0%
+icr_extraction              4567.81   97.4%       37817.0          3.0      24.3%
+probe_training                 5.74    0.1%       15334.2          0.6      11.7%
+evaluation                     0.01    0.0%       15334.0          0.0       5.0%
+token_level_detection         90.66    1.9%       29227.1          2.2      24.6%
+---------------------------------------------------------------------------------
+
+Throughput:
+  model_loading                21.87s total
+  data_loading                  1.38s total
+  icr_extraction                0.21 samples/s  (943 forward passes in 4567.8s)
+                              4842.3 ms/sample avg forward
+  probe_training              217.73 batches/s  (1250 forward passes in 5.7s)
+                                 1.0 ms/batch avg forward
+  evaluation                    0.01s total
+  token_level_detection        90.66s total
+
+icr_extraction -- Operation Breakdown:
+  ------------------------------------------------------------------------------
+  Operation                Avg(ms)  Total(s)   Time%   Count   Min(ms)   Max(ms)
+  ------------------------------------------------------------------------------
+  forward_pass             4842.30  4566.289  100.0%     943   1581.59  14176.68
+  ------------------------------------------------------------------------------
+
+probe_training (50 epochs) -- Operation Breakdown:
+  ------------------------------------------------------------------------------
+  Operation                Avg(ms)  Total(s)   Time%   Count   Min(ms)   Max(ms)
+  ------------------------------------------------------------------------------
+  backward                    2.26     2.821   49.1%    1250      1.45     62.82
+  forward                     1.02     1.280   22.3%    1250      0.76     47.80
+  validation                 14.55     0.727   12.7%      50     13.73     17.62
+  ------------------------------------------------------------------------------
+
+probe_training -- Per-Epoch Times & Metrics:
+  Epoch   1:     0.21s  train_loss=0.8153, val_loss=0.6430, auroc=0.6090, f1=0.7952
+  Epoch   2:     0.11s  train_loss=0.7878, val_loss=0.6452, auroc=0.5514, f1=0.7903
+  Epoch   3:     0.11s  train_loss=0.7579, val_loss=0.6696, auroc=0.5603, f1=0.7500
+  Epoch   4:     0.12s  train_loss=0.7494, val_loss=0.6770, auroc=0.5831, f1=0.6806
+  Epoch   5:     0.11s  train_loss=0.7532, val_loss=0.6774, auroc=0.6025, f1=0.6845
+  Epoch   6:     0.11s  train_loss=0.7520, val_loss=0.6627, auroc=0.6203, f1=0.6911
+  Epoch   7:     0.11s  train_loss=0.7216, val_loss=0.6593, auroc=0.6015, f1=0.7255
+  Epoch   8:     0.11s  train_loss=0.7043, val_loss=0.6605, auroc=0.6181, f1=0.7273
+  Epoch   9:     0.12s  train_loss=0.7360, val_loss=0.6610, auroc=0.6158, f1=0.7150
+  Epoch  10:     0.11s  train_loss=0.7394, val_loss=0.6581, auroc=0.6233, f1=0.7374
+  Epoch  11:     0.11s  train_loss=0.7075, val_loss=0.6651, auroc=0.6158, f1=0.6911
+  Epoch  12:     0.12s  train_loss=0.7136, val_loss=0.6640, auroc=0.6243, f1=0.6878
+  Epoch  13:     0.12s  train_loss=0.7121, val_loss=0.6568, auroc=0.6267, f1=0.7179
+  Epoch  14:     0.11s  train_loss=0.7271, val_loss=0.6586, auroc=0.6324, f1=0.7047
+  Epoch  15:     0.11s  train_loss=0.6993, val_loss=0.6627, auroc=0.6233, f1=0.6878
+  Epoch  16:     0.11s  train_loss=0.7087, val_loss=0.6606, auroc=0.6318, f1=0.6984
+  Epoch  17:     0.11s  train_loss=0.7309, val_loss=0.6579, auroc=0.6320, f1=0.7216
+  Epoch  18:     0.11s  train_loss=0.7045, val_loss=0.6545, auroc=0.6316, f1=0.7273
+  Epoch  19:     0.11s  train_loss=0.7107, val_loss=0.6568, auroc=0.6275, f1=0.7216
+  Epoch  20:     0.11s  train_loss=0.6922, val_loss=0.6533, auroc=0.6322, f1=0.7400
+  Epoch  21:     0.11s  train_loss=0.7212, val_loss=0.6578, auroc=0.6358, f1=0.7225
+  Epoch  22:     0.11s  train_loss=0.7128, val_loss=0.6589, auroc=0.6306, f1=0.7016
+  Epoch  23:     0.11s  train_loss=0.7128, val_loss=0.6539, auroc=0.6322, f1=0.7136
+  Epoch  24:     0.11s  train_loss=0.7126, val_loss=0.6560, auroc=0.6265, f1=0.7310
+  Epoch  25:     0.11s  train_loss=0.7165, val_loss=0.6509, auroc=0.6282, f1=0.7389
+  Epoch  26:     0.11s  train_loss=0.7118, val_loss=0.6561, auroc=0.6280, f1=0.7310
+  Epoch  27:     0.11s  train_loss=0.7089, val_loss=0.6551, auroc=0.6338, f1=0.7254
+  Epoch  28:     0.11s  train_loss=0.7223, val_loss=0.6536, auroc=0.6379, f1=0.7107
+  Epoch  29:     0.11s  train_loss=0.7220, val_loss=0.6568, auroc=0.6318, f1=0.7150
+  Epoch  30:     0.12s  train_loss=0.7193, val_loss=0.6580, auroc=0.6364, f1=0.7128
+  Epoch  31:     0.11s  train_loss=0.7018, val_loss=0.6543, auroc=0.6449, f1=0.7292
+  Epoch  32:     0.11s  train_loss=0.7097, val_loss=0.6543, auroc=0.6383, f1=0.7347
+  Epoch  33:     0.11s  train_loss=0.6892, val_loss=0.6587, auroc=0.6342, f1=0.7225
+  Epoch  34:     0.11s  train_loss=0.7202, val_loss=0.6572, auroc=0.6342, f1=0.7225
+  Epoch  35:     0.12s  train_loss=0.7077, val_loss=0.6561, auroc=0.6354, f1=0.7083
+  Epoch  36:     0.11s  train_loss=0.7019, val_loss=0.6584, auroc=0.6346, f1=0.7053
+  Epoch  37:     0.11s  train_loss=0.7086, val_loss=0.6528, auroc=0.6370, f1=0.7423
+  Epoch  38:     0.11s  train_loss=0.6841, val_loss=0.6542, auroc=0.6324, f1=0.7083
+  Epoch  39:     0.11s  train_loss=0.7297, val_loss=0.6501, auroc=0.6401, f1=0.7385
+  Epoch  40:     0.11s  train_loss=0.6842, val_loss=0.6533, auroc=0.6324, f1=0.7236
+  Epoch  41:     0.11s  train_loss=0.7089, val_loss=0.6550, auroc=0.6340, f1=0.7282
+  Epoch  42:     0.11s  train_loss=0.7142, val_loss=0.6531, auroc=0.6374, f1=0.7310
+  Epoch  43:     0.11s  train_loss=0.7068, val_loss=0.6544, auroc=0.6364, f1=0.7273
+  Epoch  44:     0.11s  train_loss=0.7321, val_loss=0.6513, auroc=0.6383, f1=0.7337
+  Epoch  45:     0.11s  train_loss=0.7004, val_loss=0.6553, auroc=0.6381, f1=0.7158
+  Epoch  46:     0.11s  train_loss=0.6942, val_loss=0.6558, auroc=0.6346, f1=0.7320
+  Epoch  47:     0.11s  train_loss=0.7121, val_loss=0.6534, auroc=0.6372, f1=0.7179
+  Epoch  48:     0.11s  train_loss=0.7031, val_loss=0.6540, auroc=0.6358, f1=0.7423
+  Epoch  49:     0.11s  train_loss=0.6937, val_loss=0.6564, auroc=0.6366, f1=0.7320
+  Epoch  50:     0.11s  train_loss=0.7118, val_loss=0.6573, auroc=0.6352, f1=0.7320
+    Average:     0.11s
+  Best AUROC: 0.6449 @ epoch 31
+  Best F1:    0.7952 @ epoch 1
+
+======================================================================
